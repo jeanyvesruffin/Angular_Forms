@@ -144,17 +144,89 @@ Completer votre fichier user-settings-form.html tapper
 </form>
 ```
 
-
-
-
 #### Utilisation de checkboxes et radios
+
+Completer votre fichier user-settings-form.html par un groupe de bouton radio tapper:
+
+```html
+<h5>Style de l'interface utilisateur</h5>
+<div class="form-group">
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="lightInterface" name="interfaceStyle" value="light">
+        <label class="form-check-label" for="lightInterface">
+            Light
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="mediumInterface" name="interfaceStyle" value="medium">
+        <label class="form-check-label" for="mediumInterface">
+            Medium
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="darInterface" name="interfaceStyle" value="dark">
+        <label class="form-check-label" for="darInterface">
+            Dark
+        </label>
+    </div>
+</div>
+```
 
 #### Controle de la selection et des options
 
+Completer votre fichier user-settings-form.html par une liste de choix tapper:
+
+
+```html
+<div class="form-group">
+    <label for="subscriptionType">Type de souscription</label>
+    <select class="form-control" id="subscriptionType">
+        <option>Mensuelle</option>
+        <option>Annuelle</option>
+        <option>Hebdomadaire</option>
+    </select>
+</div>
+```
+
 #### Autre controles du formulaire
+
+Completer votre fichier user-settings-form.html par une zone de saisi libre, une zone de saisi password et une saisi de date:
+
+
+```html
+<div class="form-group">
+  <label for="notes">Notes</label>
+  <textarea class="form-control" name="note" id="notes" rows="3">
+  </textarea>
+</div>
+<div class="form-group">
+  <label for="password">Mot de passe</label>
+  <input class="form-control" name="password" id="password" type="password">
+</div>
+<div class="form-group">
+  <label for="testing">Test calendrier</label>
+  <input class="form-control" name="testing" id="testing" type="date">
+</div>
+```
+
+**Changer le contenu de la balise id="testing" et changer input type="color" pour voir leur effet, nous commenterons cette partie pour le reste du cours**
 
 
 ## Data binding
+
+#### Utilisation de NgForm
+
+
+#### NgModel
+
+
+#### Creation d'un model de data
+
+
+#### Data binding bidirectionnel
+
+
+
 
 
 ## Form validation
