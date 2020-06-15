@@ -85,6 +85,8 @@ ng g c user-settings-form
 * c: component
 * [Nom du component]
 
+**Lors de la creation la maj automatique de app.module.ts est faite**
+
 * Dans le fichier app.component.html, supprimer son contenu et y ajouter la directive du selector du component user-settings-form:
 
 ```html
@@ -100,9 +102,50 @@ ng g c user-settings-form
 </form>
 ```
 
+*Rappel* il est necessaire de rebuild lors de l'ajout de modules.
 
 
 #### Utilisation de bootstrap pour le style
+
+Nous utiliserons https://getbootstrap.com/docs/4.5/components/forms/  pour s'inspirer du templet html de notre formulaire.
+
+* Pour cela tapper dans un terminal en su:
+
+```cmd
+npm install --save bootstrap
+```
+
+* Ajouter la propriete style bootstrap dans le fichier angular.json
+
+```json
+ "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
+            ],
+```
+
+**Rebuild Ctrl+C puis ng serve**
+
+* Tester bootstrap en changeant le style du bouton
+
+```html
+<form>
+    <input placeholder="name" />
+    <button class="btn btn-primary">OK</button>
+</form>
+```
+
+Completer votre fichier user-settings-form.html tapper
+
+```html
+<form>
+    <input placeholder="name" />
+    <button>OK</button>
+</form>
+```
+
+
+
 
 #### Utilisation de checkboxes et radios
 
