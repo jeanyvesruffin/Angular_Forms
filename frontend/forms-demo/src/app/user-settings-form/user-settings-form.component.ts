@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DefaultUserSettings } from '../data/default-user-settings';
 
 @Component({
   selector: 'app-user-settings-form',
@@ -7,8 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserSettingsFormComponent implements OnInit {
 
-  constructor() { }
 
+  defaultUserSettings : DefaultUserSettings = {
+    name: 'Jean-Yves',
+    checkboxNewLetter: true,
+    interfaceStyle: 'dark',
+    subscribeType: 'Annuelle',
+    note:'Veuillez indiquer vos notes/remarques ...'
+  };
+
+  userSettings : DefaultUserSettings = { ...this.defaultUserSettings}
+
+  
+  constructor() { }
+  
   ngOnInit(): void {
   }
 

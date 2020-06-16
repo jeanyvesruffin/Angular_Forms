@@ -3,29 +3,29 @@
     <form #myForm="ngForm" >
         <div class="form-group">
             <div><label for="name">Nom</label>
-                <input id="name" name="name" class="form-control" ngModel/>
+                <input id="name" name="name" class="form-control" [(ngModel)]="defaultUserSettings.name"/>
             </div>
             <div class="form-check form-group">
-                <input type="checkbox" class="form-check-input" id="checkbox" name="checkboxNewLetter"ngModel>
+                <input type="checkbox" class="form-check-input" id="checkbox" name="checkboxNewLetter" [(ngModel)]="defaultUserSettings.checkboxNewLetter">
                 <label class="form-check-label" for="checkbox">Recevoir les newsletters ?</label>
             </div>
         </div>
         <h5>Style de l'interface utilisateur</h5>
         <div class="form-group">
             <div class="form-check">
-                <input class="form-check-input" type="radio" id="lightInterface" name="interfaceStyle" value="light" ngModel>
+                <input class="form-check-input" type="radio" id="lightInterface" name="interfaceStyle" value="light" [(ngModel)]="defaultUserSettings.interfaceStyle">
                 <label class="form-check-label" for="lightInterface">
                     Light
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" id="mediumInterface" name="interfaceStyle" value="medium" ngModel>
+                <input class="form-check-input" type="radio" id="mediumInterface" name="interfaceStyle" value="medium" [(ngModel)]="defaultUserSettings.interfaceStyle">
                 <label class="form-check-label" for="mediumInterface">
                     Medium
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" id="darInterface" name="interfaceStyle" value="dark" ngModel>
+                <input class="form-check-input" type="radio" id="darInterface" name="interfaceStyle" value="dark" [(ngModel)]="defaultUserSettings.interfaceStyle">
                 <label class="form-check-label" for="darInterface">
                     Dark
                 </label>
@@ -33,7 +33,7 @@
         </div>
         <div class="form-group">
             <label for="subscriptionType">Type de souscription</label>
-            <select class="form-control" id="subscriptionType" name="subscribeType" ngModel>
+            <select class="form-control" id="subscriptionType" name="subscribeType" [(ngModel)]="defaultUserSettings.subscribeType">
                 <option>Mensuelle</option>
                 <option>Annuelle</option>
                 <option>Hebdomadaire</option>
@@ -41,7 +41,7 @@
         </div>
         <div class="form-group">
             <label for="notes">Notes</label>
-            <textarea class="form-control" name="note" id="notes" rows="3" ngModel>
+            <textarea class="form-control" name="note" id="notes" rows="3" [(ngModel)]="defaultUserSettings.note">
             </textarea>
         </div>
         <!-- <div class="form-group">
@@ -55,6 +55,7 @@
         <button class="btn btn-primary">Envoyer</button>
     </form>
 </div>
-
-<h3>{{ myForm.value | json }}</h3>
-
+<!-- <h3>{{ defaultUserSettings | json }}</h3>
+<h3>{{ defaultUserSettings.name | json }}</h3> -->
+<h3>{{ defaultUserSettings | json }}</h3>
+<h3>{{ userSettings | json }}</h3>

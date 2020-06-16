@@ -214,9 +214,6 @@ Completer votre fichier user-settings-form.html par une zone de saisi libre, une
 </div>
 ```
 
-
-
-
 ##  Data binding
 
 #### Utilisation de NgForm
@@ -258,19 +255,104 @@ Nous pouvons constater que la variable referent ngForm est de type Object.
 
 #### Creation d'un model de data
 
+* Creer un dossier src/app/data
+* Creer un fichier user-settings.ts
+* Creation de l'interface src/app/UserSettings dans user-settings.ts
 
+```ts
+export interface defaultUseSettings {
+    name: string,
+    checkboxNewLetter: boolean,
+    interfaceStyle: string,
+    subscribeType: string,
+    note:string
+}
+```
 
+* Importer l'interface dans src/app/user-settings-form/user-settings-form.component.ts
+
+```ts
+...
+import { defaultUseSettings } from '../data/user-settings';
+...
+export class defaultUseSettingsFormComponent implements OnInit {
+  defaultUseSettings : defaultUseSettings = {
+    name: 'Jean-Yves',
+    checkboxNewLetter: true,
+    interfaceStyle: 'dark',
+    subscribeType: 'Annuelle',
+    note:'Veuillez indiquer vos notes/remarques ...'
+  };
+...
+}
+```
 
 #### Data binding bidirectionnel
 
+Nous allons maintenant brancher notre model a notre formulaire. Pour cela nous ajoutons à notre templet html des banana bracket ( [()] ) autour de [(ngModel)]="defaultUseSettings.[propriete]" et ajouter un controle à la fin.
+
+
+```html
+...
+<input id="name" name="name" class="form-control" [(ngModel)]="defaultUseSettings.name"/>
+...
+<input type="checkbox" class="form-check-input" id="checkbox" name="checkboxNewLetter" [(ngModel)]="defaultUseSettings.checkboxNewLetter">
+...
+<input class="form-check-input" type="radio" id="lightInterface" name="interfaceStyle" value="light" [(ngModel)]="defaultUseSettings.interfaceStyle">
+...
+<input class="form-check-input" type="radio" id="mediumInterface" name="interfaceStyle" value="medium" [(ngModel)]="defaultUseSettings.interfaceStyle">
+...
+<input class="form-check-input" type="radio" id="darInterface" name="interfaceStyle" value="dark" [(ngModel)]="defaultUseSettings.interfaceStyle">
+...
+<select class="form-control" id="subscriptionType" name="subscribeType" [(ngModel)]="defaultUseSettings.subscribeType">
+...
+<textarea class="form-control" name="note" id="notes" rows="3" [(ngModel)]="defaultUseSettings.note">
+...
+<h3>{{ defaultUseSettings | json }}</h3>
+```
+
+#### Copie des datas du formulaire
+
+Exemple dans le cas d'une deconnexion utilisateur ou un retour arriere de navigation, les données du formulaire initiales ne doivent pas etre corrompu.
+
+* Ajouter une copie à l'aide de l'operation spread ...
+
+```ts
+userSettings : DefaultUserSettings = { ...this.defaultUserSettings}
+```
+
+Nous pouvons controler son effet à l'aide de l'interpolation
+
+```html
+<h3>{{ defaultUserSettings | json }}</h3>
+<h3>{{ userSettings | json }}</h3>
+```
+
+## Validation du formulaire
+
+#### Validation de champs HTML
+#### Validation des classes CSS
+#### Validation des proprietes ngModel
 
 
 
 
-## Form validation
+
 
 
 ## HTTP Posting
 
 ## Third-party Controls
 
+## Bug-fix et Tips
+
+1 . tsconfig.json ==> file not found
+* Ajouter à votre fichier de config
+
+```json
+  "include": [
+    "src/**/*"
+  ],
+```
+
+2 . Copie proprietes avec l'operateur spread ...  pour faire une copie d'un objet dans un objet utiliser l'operateur lodash
