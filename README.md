@@ -193,6 +193,11 @@ Completer votre fichier user-settings-form.html par une liste de choix tapper:
 Completer votre fichier user-settings-form.html par une zone de saisi libre, une zone de saisi password et une saisi de date:
 
 
+**Changer le contenu de la balise id="testing" et changer input type="color" pour voir leur effet, nous commenterons cette partie pour le reste du cours**
+
+
+
+
 ```html
 <div class="form-group">
   <label for="notes">Notes</label>
@@ -209,11 +214,10 @@ Completer votre fichier user-settings-form.html par une zone de saisi libre, une
 </div>
 ```
 
-**Changer le contenu de la balise id="testing" et changer input type="color" pour voir leur effet, nous commenterons cette partie pour le reste du cours**
 
 
 
-##  Data binding
+##  Data binding
 
 #### Utilisation de NgForm
 
