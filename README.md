@@ -15,7 +15,7 @@ Voici quelques-unes des différences entre les deux types:
 
 > Dans une approche basée sur un modèle, la majeure partie de la logique est générée à partir du modèle, tandis que dans une approche réactive, la logique réside principalement dans le code composant ou code typescript.
 
-> Les tests uinitaires sont plus facile sur formulaire reactif.
+> Les tests unitaires sont plus facile sur formulaire reactif.
 
 ## Creation du projet
 
@@ -27,7 +27,7 @@ npm -v
 ng --version
 ```
 
-* Si l'on a des packages manquant se referer a la documentation
+* Si l'un des packages est manquant se referer a la documentation
 
 https://www.ostechnix.com/install-node-js-linux/
 
@@ -180,7 +180,7 @@ Completer votre fichier user-settings-form.html par une liste de choix tapper:
 ```html
 <div class="form-group">
     <label for="subscriptionType">Type de souscription</label>
-    <select class="form-control" id="subscriptionType">
+    <select class="form-control" id="subscriptionType" name="subscribeType" >
         <option>Mensuelle</option>
         <option>Annuelle</option>
         <option>Hebdomadaire</option>
@@ -216,8 +216,39 @@ Completer votre fichier user-settings-form.html par une zone de saisi libre, une
 
 #### Utilisation de NgForm
 
+* Utiliser une variable de reference sur la directive ngForm
+
+```html
+<form #myForm="ngForm">
+```
+
+* Afficher le résultat à l'aide de l'interpolation ({{}}) en bas du formulaire
+
+```html
+{{ myForm }
+```
+
+Nous pouvons constater que la variable referent ngForm est de type Object.
+
+* Ajouter un filtre json (| json) à notre resultat pour observer le contenu de l'objet.
+
+```html
+{{ myForm.form | json }
+```
 
 #### NgModel
+
+* Ajouter ngModel à notre balise input et controler de contenu de la propriete value de notre reference myForm.
+
+```html
+<input id="name" name="name" class="form-control" ngModel/>
+<h3>{{ myForm.value | json }}</h3>
+```
+
+* Ajouter ngModel sur tous vos input pour controler leur fonctionnement et reactivite.
+
+
+**Lors de la saisi d'un nom vous pouvez constater que la valeur name change instantanement**
 
 
 #### Creation d'un model de data
