@@ -213,7 +213,7 @@ Completer votre fichier user-settings-form.html par une zone de saisi libre, une
 
 
 
-## Data binding
+##  Data binding
 
 #### Utilisation de NgForm
 
