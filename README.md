@@ -211,6 +211,8 @@ Completer votre fichier user-settings-form.html par une zone de saisi libre, une
 
 **Changer le contenu de la balise id="testing" et changer input type="color" pour voir leur effet, nous commenterons cette partie pour le reste du cours**
 
+
+
 ## Data binding
 
 #### Utilisation de NgForm
