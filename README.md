@@ -632,7 +632,7 @@ Postons notre formulaire sur un endpoint reel. Pour cela nous utiliserons l'outi
 
 2 . Renseigner dans PutsReq la reponse attendu en éditant la partie "Response Builder" et y indiquer:
 
-```ts
+```js
 var parsedBody = JSON.parse(request.body);
 response.body = parsedBody;
 ```
@@ -643,12 +643,140 @@ response.body = parsedBody;
 
 ![interface putsreq](document/putsreq.png)
 
+4 . Amusez-vous ensuite à completer la reponse builder retournee par putsreq, par exemple, en retournant l'id 'fictif' de la base de donnée, pour observer le resultat dans votre navigateur lors de l'envoi de votre formulaire.
 
+```js
+var parsedBody = JSON.parse(request.body);
+parsedBody.id='5124'
+response.body = parsedBody;
+```
 
 #### Gestion des errors post
 
+1 . Commentez/ Supprimez la reponse builder de putsreq pour y indiquer desormais une reponse nous retournant une erreur type 400:
+
+```js
+/* var parsedBody = JSON.parse(request.body);
+parsedBody.id='5124'
+response.body = parsedBody; */
+response.status = 400;
+```
+
+2 . Tester dans votre navigateur, console ouverte.
+
+![error](document/putsreq1.png)
+
+Nous pouvons a partir de cela, declencher une reponse en erreur, sur notre front, un utilisant la propriete de l'objet HttpErrorResponse.status=400. 
+
+3 . Coder la reponse en erreur et la methode onHttpError(error) en utilisant deux attributs boolean initialise a faux et un string initialise.
+
+```ts
+  postError =  false;
+  postErrorMessage = '';
+  ...
+  onSubmit(form : NgForm) {
+    console.log(' in submit : ', form.valid);
+    this.dataService.postUserSettingsForm(this.defaultUserSettings).subscribe(
+      result => console.log('sucess : ', result),
+      error => this.onHttpError(error)
+    );
+  }
+  onHttpError(errorResponse: any): void {
+    console.log('error: ', errorResponse);
+    this.postError = true;
+    this.postErrorMessage = errorResponse.error.errorMessage;
+  }
+```
+
+4 . Ajouter à notre templet le controle de l'attributs postErrorMessage (interpolation)
+ 
+```html
+<div [hidden]="!postError" class="alert alert-danger">
+  {{ postErrorMessage }}
+</div>
+```
+
+5 . Ajouter dans la requete builder de putsreq, puis update :
+
+```js
+/* var parsedBody = JSON.parse(request.body);
+parsedBody.id='5124'
+response.body = parsedBody; */
+response.status = 400;
+response.body = { errorMessage: 'Les erreurs seront ici ....' };
+```
+
+6 . Ajouter a la methode onSubmit une condition de validation
+
+```js
+onSubmit(form : NgForm) {
+  if(form.valid){
+    this.dataService.postUserSettingsForm(this.defaultUserSettings).subscribe(
+      result => console.log('sucess : ', result),
+      error => this.onHttpError(error)
+    );
+  }
+  else {
+    this.postError = true;
+    this.postErrorMessage = "Veuillez fixer les erreurs ci-dessus"
+  }
+}
+```
+
 #### Recuperer les datas pour un element selectionne
 
+1 . A l'aide de la directive *ngFor creer une liste en lieu et place de la selection du type de souscription 'Annuelle'...
+
+```html
+<select class="form-control" id="subscriptionType" name="subscribeType"
+    [(ngModel)]="defaultUserSettings.subscribeType">
+    <option  *ngFor="let type of subscriptionTypes">
+        {{ type }}
+    </option>
+</select>
+```
+
+2 . Declarer l'attribut subscriptionTypes dans votre component.
+
+```ts
+subscriptionTypes = ['Annuelle', 'Hebdomadaire', 'Mensuelle'];
+```
+
+3 . Modifier l'attribut subscriptionTypes dans votre component.
+
+```ts
+...
+import { Observable } from 'rxjs';
+...
+subscriptionTypes: Observable<string[]>;
+...
+```
+
+4 . Nous allons maintenant initialiser le component à l'aide de ngOnInit() et initialiser l'attibut subscriptionTypes en utilisant le dataService puis nous declarons la methode retournant les datas:
+
+
+Dans user-settings-form.component.ts
+```ts
+  ngOnInit(): void {
+    this.subscriptionTypes = this.dataService.getSubscriptiontypes();
+  }
+```
+
+Dans dat.service.ts
+```ts
+getSubscriptiontypes(): Observable<string[]> {
+  return of(['Mensuelle', 'Annuelle', 'Hebdomadaire']);
+}
+```
+
+5 . Maintenant que notre list est un observable, nous devons ajouter cela a notre templet html (|async)
+
+```html
+<option  *ngFor="let type of subscriptionTypes | async">
+    {{ type }}
+</option>
+
+```
 
 
 ## Third-party Controls

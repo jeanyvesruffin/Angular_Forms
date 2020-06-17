@@ -7,6 +7,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class DataService {
   constructor(private http : HttpClient) { }
+  getSubscriptiontypes(): Observable<string[]> {
+    return of(['Mensuelle', 'Annuelle', 'Hebdomadaire']);
+  }
   postUserSettingsForm(userSettings: DefaultUserSettings) : Observable<any>{
     return this.http.post('https://putsreq.com/ppObaykjvmFQvZRhwAma', userSettings);
     // return of(userSettings);
