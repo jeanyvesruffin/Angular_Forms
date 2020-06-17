@@ -1,16 +1,26 @@
 <div class="container">
     <h2>Configurations utilisateur</h2>
-    <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)"><!--ngNativeValidate-->
+    <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+        <!--ngNativeValidate-->
         <div class="form-group">
             <div><label for="name">Nom</label>
                 <input required #nameField="ngModel" id="name" name="name" class="form-control"
-                    [(ngModel)]="defaultUserSettings.name"
-                    (blur)="onBlur(nameField)" 
-                    [class.field-error]="myForm.submitted && nameField.invalid"/>
+                    [(ngModel)]="defaultUserSettings.name" (blur)="onBlur(nameField)"
+                    [class.field-error]="myForm.submitted && nameField.invalid" />
                 <div [hidden]="!myForm.submitted || nameField.valid" class="alert alert-danger">
                     Entrez votre nom
                 </div>
             </div>
+            <div class="form-group">
+                <label for="startDate">Date</label>
+                <input type="text" placeholder="Start Date" class="form-control" [(ngModel)]="startDate"
+                    name="startDate" id="startDate" bsDatepicker>
+            </div>
+            Start Date : {{ startDate }}
+            <button name="singleModel" type="button" class="btn btn-primary" [(ngModel)]="singleModel" btnCheckbox
+                btnCheckboxTrue="On" btnCheckboxFalse="Off">
+                {{ singleModel }}
+            </button>
             <!--<h3>dirty : {{ propertyTest.dirty }}</h3>
             <h3>pristine : {{ propertyTest.pristine }}</h3>
             <h3>touched : {{ propertyTest.touched }}</h3>
@@ -25,7 +35,16 @@
         </div>
         <h5>Style de l'interface utilisateur</h5>
         <div class="form-group">
-            <div class="form-check">
+            <div class="btn-group">
+                <label name="interfaceStyle" class="btn btn-primary" [(ngModel)]="defaultUserSettings.interfaceStyle"
+                    btnRadio="Light" tabindex="0" role="button">Light</label>
+                <label name="interfaceStyle" class="btn btn-primary" [(ngModel)]="defaultUserSettings.interfaceStyle"
+                    btnRadio="Medium" tabindex="0" role="button">Medium</label>
+                <label name="interfaceStyle" class="btn btn-primary" [(ngModel)]="defaultUserSettings.interfaceStyle"
+                    btnRadio="Dark" tabindex="0" role="button">Dark</label>
+            </div>
+        </div>
+        <!-- <div class="form-check">
                 <input class="form-check-input" type="radio" id="lightInterface" name="interfaceStyle" value="light"
                     [(ngModel)]="defaultUserSettings.interfaceStyle">
                 <label class="form-check-label" for="lightInterface">
@@ -45,13 +64,12 @@
                 <label class="form-check-label" for="darInterface">
                     Dark
                 </label>
-            </div>
-        </div>
+            </div> -->
         <div class="form-group">
             <label for="subscriptionType">Type de souscription</label>
             <select class="form-control" id="subscriptionType" name="subscribeType"
                 [(ngModel)]="defaultUserSettings.subscribeType">
-                <option  *ngFor="let type of subscriptionTypes | async">
+                <option *ngFor="let type of subscriptionTypes | async">
                     {{ type }}
                 </option>
             </select>

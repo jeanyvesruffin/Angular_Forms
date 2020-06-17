@@ -769,7 +769,7 @@ getSubscriptiontypes(): Observable<string[]> {
 }
 ```
 
-5 . Maintenant que notre list est un observable, nous devons ajouter cela a notre templet html (|async)
+5 . Maintenant que notre list est un observable, nous devons ajouter un pipe asynchrone a notre templet html (|async)
 
 ```html
 <option  *ngFor="let type of subscriptionTypes | async">
@@ -781,6 +781,113 @@ getSubscriptiontypes(): Observable<string[]> {
 
 ## Third-party Controls
 
+Le probleme a resoudre et le cross-platform. Chaque navigateur reagissent differemment. Pour resoudre le proble nous etidirons les ressources angular.io et ngx-bootstrap
+
+#### Ressources de formulaire sur angular.io
+
+* https://angular.io/resources?category=development
+* https://material.angular.io/ ( component>form control )
+* https://www.primefaces.org/primeng/
+
+#### Installation et utilisation de ngx-bootstrap
+
+1 . Ajouter le component buttons de la librairy ngx-bootstrap
+
+```cmd
+ng add ngx-bootstrap --component buttons
+```
+
+2 . Importer la librairie dans le module:
+
+```ts
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+
+@NgModule({
+  ...
+  imports: [  
+    ...
+    ButtonsModule.forRoot()
+  ],
+```
+3 . Testons le bouton ngx Custom checkbox value dans notre template html et ajouter singleModel comme attribut dans notre component
+
+Templet
+```html
+<button name ="singleModel" type="button" class="btn btn-primary" [(ngModel)]="singleModel" btnCheckbox btnCheckboxTrue="On"
+    btnCheckboxFalse="Off">
+    {{ singleModel }
+</button>
+```
+Component
+```ts
+  singleModel = "On";
+```
+
+#### Les boutons
+
+1 . Recuperer les boutons radio de la doc ngx  et les remplacer en lieu et place de notre choix d'interface:
+
+
+```html
+<div class="form-group">
+    <div class="btn-group">
+        <label name="interfaceStyle" class="btn btn-primary" [(ngModel)]="defaultUserSettings.interfaceStyle"
+            btnRadio="Light" tabindex="0" role="button">Light</label>
+        <label name="interfaceStyle" class="btn btn-primary" [(ngModel)]="defaultUserSettings.interfaceStyle"
+            btnRadio="Medium" tabindex="0" role="button">Medium</label>
+        <label name="interfaceStyle" class="btn btn-primary" [(ngModel)]="defaultUserSettings.interfaceStyle"
+            btnRadio="Dark" tabindex="0" role="button">Dark</label>
+    </div>
+</div>
+```
+
+2 . Controler l'etat des boutons, commenter le contenu de la methode onSubmit et un indiquer un console.log(' in submit : ', form.value);
+
+#### Les dates et periodes
+
+1 . installer et ajouter le component datapicker à votre projet et module
+
+```cmd
+ng add ngx-bootstrap  --component datepicker
+```
+```ts
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+  imports: [
+    ...
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot()
+  ],
+```
+
+2 . Ajouter le templet du calendrier à notre templet
+
+```html
+<div class="form-group">
+  <label for="startDate">Date</label>
+  <input type="text" placeholder="Start Date" class="form-control" [(ngModel)]="startDate"
+      name="startDate" id="startDate" bsDatepicker>
+</div>
+```
+
+3 . Initialiser starDate dans le component
+
+```ts
+  startDate: Date;
+  ...
+  ngOnInit(): void {
+  ...
+    this.startDate = new Date();
+  }
+```
+
+4 . Ajouter à votre fichier angular.json
+
+```json
+ "styles": [
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+            ],
+```
 
 ## Bug-fix et Tips
 
