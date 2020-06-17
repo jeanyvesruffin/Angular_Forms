@@ -1,31 +1,47 @@
 <div class="container">
     <h2>Configurations utilisateur</h2>
-    <form #myForm="ngForm" >
+    <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)"><!--ngNativeValidate-->
         <div class="form-group">
             <div><label for="name">Nom</label>
-                <input id="name" name="name" class="form-control" [(ngModel)]="defaultUserSettings.name"/>
+                <input required #nameField="ngModel" id="name" name="name" class="form-control"
+                    [(ngModel)]="defaultUserSettings.name"
+                    (blur)="onBlur(nameField)" 
+                    [class.field-error]="myForm.submitted && nameField.invalid"/>
+                <div [hidden]="!myForm.submitted || nameField.valid" class="alert alert-danger">
+                    Entrez votre nom
+                </div>
             </div>
+            <!--<h3>dirty : {{ propertyTest.dirty }}</h3>
+            <h3>pristine : {{ propertyTest.pristine }}</h3>
+            <h3>touched : {{ propertyTest.touched }}</h3>
+            <h3>untouched : {{ propertyTest.untouched }}</h3>
+            <h3>valid : {{ propertyTest.valid }}</h3>
+            <h3>invalid : {{ propertyTest.invalid }}</h3>-->
             <div class="form-check form-group">
-                <input type="checkbox" class="form-check-input" id="checkbox" name="checkboxNewLetter" [(ngModel)]="defaultUserSettings.checkboxNewLetter">
+                <input type="checkbox" class="form-check-input" id="checkbox" name="checkboxNewLetter"
+                    [(ngModel)]="defaultUserSettings.checkboxNewLetter">
                 <label class="form-check-label" for="checkbox">Recevoir les newsletters ?</label>
             </div>
         </div>
         <h5>Style de l'interface utilisateur</h5>
         <div class="form-group">
             <div class="form-check">
-                <input class="form-check-input" type="radio" id="lightInterface" name="interfaceStyle" value="light" [(ngModel)]="defaultUserSettings.interfaceStyle">
+                <input class="form-check-input" type="radio" id="lightInterface" name="interfaceStyle" value="light"
+                    [(ngModel)]="defaultUserSettings.interfaceStyle">
                 <label class="form-check-label" for="lightInterface">
                     Light
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" id="mediumInterface" name="interfaceStyle" value="medium" [(ngModel)]="defaultUserSettings.interfaceStyle">
+                <input class="form-check-input" type="radio" id="mediumInterface" name="interfaceStyle" value="medium"
+                    [(ngModel)]="defaultUserSettings.interfaceStyle">
                 <label class="form-check-label" for="mediumInterface">
                     Medium
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" id="darInterface" name="interfaceStyle" value="dark" [(ngModel)]="defaultUserSettings.interfaceStyle">
+                <input class="form-check-input" type="radio" id="darInterface" name="interfaceStyle" value="dark"
+                    [(ngModel)]="defaultUserSettings.interfaceStyle">
                 <label class="form-check-label" for="darInterface">
                     Dark
                 </label>
@@ -33,7 +49,8 @@
         </div>
         <div class="form-group">
             <label for="subscriptionType">Type de souscription</label>
-            <select class="form-control" id="subscriptionType" name="subscribeType" [(ngModel)]="defaultUserSettings.subscribeType">
+            <select class="form-control" id="subscriptionType" name="subscribeType"
+                [(ngModel)]="defaultUserSettings.subscribeType">
                 <option>Mensuelle</option>
                 <option>Annuelle</option>
                 <option>Hebdomadaire</option>
@@ -59,3 +76,4 @@
 <h3>{{ defaultUserSettings.name | json }}</h3> -->
 <h3>{{ defaultUserSettings | json }}</h3>
 <h3>{{ userSettings | json }}</h3>
+<h3>{{ myForm.submitted }}</h3>

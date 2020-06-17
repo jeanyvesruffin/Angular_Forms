@@ -19,7 +19,7 @@ Voici quelques-unes des différences entre les deux types:
 
 ## Creation du projet
 
-* Verifier l'installation de nodejs, npm et angular avec les commandes ci-dessous:
+1 . Verifier l'installation de nodejs, npm et angular avec les commandes ci-dessous:
 
 ```cmd
 node -v
@@ -27,13 +27,13 @@ npm -v
 ng --version
 ```
 
-* Si l'un des packages est manquant se referer a la documentation
+2 . Si l'un des packages est manquant se referer a la documentation
 
 https://www.ostechnix.com/install-node-js-linux/
 
 https://cli.angular.io/
 
-* Creation du projet angular
+3 . Creation du projet angular
 
 ```cmd
 mkdir [projet]
@@ -87,13 +87,13 @@ ng g c user-settings-form
 
 **Lors de la creation la maj automatique de app.module.ts est faite**
 
-* Dans le fichier app.component.html, supprimer son contenu et y ajouter la directive du selector du component user-settings-form:
+1 . Dans le fichier app.component.html, supprimer son contenu et y ajouter la directive du selector du component user-settings-form:
 
 ```html
 <app-user-settings-form></app-user-settings-form>
 ```
 
-* Dans le fichier user-settings-form.html creer votre formulaire html
+2 . Dans le fichier user-settings-form.html creer votre formulaire html
 
 ```html
 <form>
@@ -109,13 +109,13 @@ ng g c user-settings-form
 
 Nous utiliserons https://getbootstrap.com/docs/4.5/components/forms/  pour s'inspirer du templet html de notre formulaire.
 
-* Pour cela tapper dans un terminal en su:
+1 . Pour cela tapper dans un terminal en su:
 
 ```cmd
 npm install --save bootstrap
 ```
 
-* Ajouter la propriete style bootstrap dans le fichier angular.json
+2 . Ajouter la propriete style bootstrap dans le fichier angular.json
 
 ```json
  "styles": [
@@ -126,7 +126,7 @@ npm install --save bootstrap
 
 **Rebuild Ctrl+C puis ng serve**
 
-* Tester bootstrap en changeant le style du bouton
+3 . Tester bootstrap en changeant le style du bouton
 
 ```html
 <form>
@@ -135,7 +135,7 @@ npm install --save bootstrap
 </form>
 ```
 
-Completer votre fichier user-settings-form.html tapper
+4 . Completer votre fichier user-settings-form.html tapper
 
 ```html
 <form>
@@ -146,7 +146,7 @@ Completer votre fichier user-settings-form.html tapper
 
 #### Utilisation de checkboxes et radios
 
-Completer votre fichier user-settings-form.html par un groupe de bouton radio tapper:
+1 . Completer votre fichier user-settings-form.html par un groupe de bouton radio tapper:
 
 ```html
 <h5>Style de l'interface utilisateur</h5>
@@ -174,7 +174,7 @@ Completer votre fichier user-settings-form.html par un groupe de bouton radio ta
 
 #### Controle de la selection et des options
 
-Completer votre fichier user-settings-form.html par une liste de choix tapper:
+1 . Completer votre fichier user-settings-form.html par une liste de choix tapper:
 
 
 ```html
@@ -190,13 +190,9 @@ Completer votre fichier user-settings-form.html par une liste de choix tapper:
 
 #### Autre controles du formulaire
 
-Completer votre fichier user-settings-form.html par une zone de saisi libre, une zone de saisi password et une saisi de date:
-
+1 . Completer votre fichier user-settings-form.html par une zone de saisi libre, une zone de saisi password et une saisi de date:
 
 **Changer le contenu de la balise id="testing" et changer input type="color" pour voir leur effet, nous commenterons cette partie pour le reste du cours**
-
-
-
 
 ```html
 <div class="form-group">
@@ -218,13 +214,13 @@ Completer votre fichier user-settings-form.html par une zone de saisi libre, une
 
 #### Utilisation de NgForm
 
-* Utiliser une variable de reference sur la directive ngForm
+1 . Utiliser une variable de reference sur la directive ngForm
 
 ```html
 <form #myForm="ngForm">
 ```
 
-* Afficher le résultat à l'aide de l'interpolation ({{}}) en bas du formulaire
+2 . Afficher le résultat à l'aide de l'interpolation ({{}}) en bas du formulaire
 
 ```html
 {{ myForm }
@@ -232,7 +228,7 @@ Completer votre fichier user-settings-form.html par une zone de saisi libre, une
 
 Nous pouvons constater que la variable referent ngForm est de type Object.
 
-* Ajouter un filtre json (| json) à notre resultat pour observer le contenu de l'objet.
+3 . Ajouter un filtre json (| json) à notre resultat pour observer le contenu de l'objet.
 
 ```html
 {{ myForm.form | json }
@@ -240,14 +236,14 @@ Nous pouvons constater que la variable referent ngForm est de type Object.
 
 #### NgModel
 
-* Ajouter ngModel à notre balise input et controler de contenu de la propriete value de notre reference myForm.
+1 . Ajouter ngModel à notre balise input et controler de contenu de la propriete value de notre reference myForm.
 
 ```html
 <input id="name" name="name" class="form-control" ngModel/>
 <h3>{{ myForm.value | json }}</h3>
 ```
 
-* Ajouter ngModel sur tous vos input pour controler leur fonctionnement et reactivite.
+2 . Ajouter ngModel sur tous vos input pour controler leur fonctionnement et reactivite.
 
 
 **Lors de la saisi d'un nom vous pouvez constater que la valeur name change instantanement**
@@ -255,9 +251,9 @@ Nous pouvons constater que la variable referent ngForm est de type Object.
 
 #### Creation d'un model de data
 
-* Creer un dossier src/app/data
-* Creer un fichier user-settings.ts
-* Creation de l'interface src/app/UserSettings dans user-settings.ts
+1 . Creer un dossier src/app/data
+2 . Creer un fichier user-settings.ts
+3 . Creation de l'interface src/app/UserSettings dans user-settings.ts
 
 ```ts
 export interface defaultUseSettings {
@@ -269,7 +265,7 @@ export interface defaultUseSettings {
 }
 ```
 
-* Importer l'interface dans src/app/user-settings-form/user-settings-form.component.ts
+4 . Importer l'interface dans src/app/user-settings-form/user-settings-form.component.ts
 
 ```ts
 ...
@@ -289,7 +285,7 @@ export class defaultUseSettingsFormComponent implements OnInit {
 
 #### Data binding bidirectionnel
 
-Nous allons maintenant brancher notre model a notre formulaire. Pour cela nous ajoutons à notre templet html des banana bracket ( [()] ) autour de [(ngModel)]="defaultUseSettings.[propriete]" et ajouter un controle à la fin.
+1 . Nous allons maintenant brancher notre model a notre formulaire. Pour cela nous ajoutons à notre templet html des banana bracket ( [()] ) autour de [(ngModel)]="defaultUseSettings.[propriete]" et ajouter un controle à la fin.
 
 
 ```html
@@ -315,13 +311,13 @@ Nous allons maintenant brancher notre model a notre formulaire. Pour cela nous a
 
 Exemple dans le cas d'une deconnexion utilisateur ou un retour arriere de navigation, les données du formulaire initiales ne doivent pas etre corrompu.
 
-* Ajouter une copie à l'aide de l'operation spread ...
+1 . Ajouter une copie à l'aide de l'operation spread ...
 
 ```ts
 userSettings : DefaultUserSettings = { ...this.defaultUserSettings}
 ```
 
-Nous pouvons controler son effet à l'aide de l'interpolation
+2 . Nous pouvons controler son effet à l'aide de l'interpolation
 
 ```html
 <h3>{{ defaultUserSettings | json }}</h3>
@@ -331,20 +327,335 @@ Nous pouvons controler son effet à l'aide de l'interpolation
 ## Validation du formulaire
 
 #### Validation de champs HTML
+
+Les attributs de validation HTML5 sont:
+* required
+* pattern
+* minlength
+* maxlength
+* min
+* max ...
+
+1 . Dans notre fichier ts, initialiser votre interface defaultUserSettings à null
+
+```ts
+  defaultUserSettings : DefaultUserSettings = {
+    name: null,
+    checkboxNewLetter: null,
+    interfaceStyle: null,
+    subscribeType: null,
+    note:null
+  };
+```
+
+2 . Dans le fichier html ajouter dans la balise form ngNativeValidate, cela pour faire reference à une validation des champs par le navigateur. Puis ajouter comme controle sur l'input id="name" required, cela aura pour effet l'affichage d'une pop-up sur le champs Nom si celui-ci n'est pas validé lors du click sur Envoyer
+
+```html
+<form #myForm="ngForm" ngNativeValidate>
+...
+<input required id="name" name="name" class="form-control" [(ngModel)]="defaultUserSettings.name"/>
+          
+```
+
+3 . Controler son effet.
+
+4 .Remplacer maintenant required par pattern="B.*", cela aura pour effet de forcer l'utilisateur à utiliser notre pattern à savoir, le nom commence par un B suivi de quelque chose.
+
+5 . Remplacer maintenant pattern="B.*" par minlength="3", cela aura pour effet de forcer l'utilisateur à indiquer au minimum 3 caracteres dans son nom.
+
+6 . Remplacer maintenant minlength="3" par maxlength="3", cela aura pour effet de forcer l'utilisateur à utiliser au maximum 3 caracteres dans son nom.
+
+7 . Pour le controle min et max nous devons typer notre input, puis ajouter par exemple min = "3" max = "300". Cela aura pour effet de limiter la saisi utilisateur à saisir un nombre entre 3 et 300.
+
+```html
+<input  type="number" min="3" max="300" id="name" name="name" class="form-control" [(ngModel)]="defaultUserSettings.name"/>
+```    
 #### Validation des classes CSS
+
+1 . Remplacer type="number" min="3" max="300" par required.
+2 . Ajouter une variable de reference #classTest.
+3 . Indiquer dans un h3 les proprietes className de la variable.
+
+```html
+<div>
+  <label for="name">Nom</label>
+    <input required #classTest id="name" name="name" class="form-control" [(ngModel)]="defaultUserSettings.name"/>
+</div>
+<h3>{{ classTest.className }}</h3>
+```
+
+4 . Nous pouvons constater le changement de proprietes lors de la manipulation du champs.
+
 #### Validation des proprietes ngModel
 
+1 . Reprenons l'input suivant et ajoutons ngModel comme valeur de notre reference maintenant appelé #propertyTest:
+
+```html
+<div>
+  <label for="name">Nom</label>
+  <input required #propertyTest="ngModel" id="name" name="name" class="form-control"
+                  [(ngModel)]="defaultUserSettings.name" />
+</div>
+<h3>dirty : {{ propertyTest.dirty }}</h3>
+<h3>pristine : {{ propertyTest.pristine }}</h3>
+<h3>touched : {{ propertyTest.touched }}</h3>
+<h3>untouched : {{ propertyTest.untouched }}</h3>
+<h3>valid : {{ propertyTest.valid }}</h3>
+<h3>invalid : {{ propertyTest.invalid }}</h3>
+```
+
+#### Style du formulaire avec les erreurs de validation (toast, pop-up ...)
+
+1 . Effacez/ commentez les lignes precedentes utilise pour le debug et modifier votre templet html afin que:
+
+```html
+<div>
+  <label for="name">Nom</label>
+  <input required #nameField="ngModel" id="name" name="name" class="form-control"
+                  [(ngModel)]="defaultUserSettings.name" />
+</div>
+```
+
+2 . Dans le fichier CSS de votre component (ici user-...css mais aurait pu etre sur le component global app...css) taper:
+
+```css
+.ng-invalid:not(form).ng-touched {
+  border: 1px solid red;
+}
+```
+  **Cela aura pour effet d'encadrer le champ en rouge si le champs est invalid apres que l'utilisateur est fait une tentative**
+
+* not(form) permet d'exclure le selecteur form des bordures de ng-invalid.
+* ng-touch permet que le champs soit controler apres le premier click utilisateur dans ce champs. 
+
+3 . Nous ajoutons à notre templet html div class="form-group" de notre input id="name", une div affichant une alerte en dessous du champs.
+
+```html
+<div><label for="name">Nom</label>
+    <input required #nameField="ngModel" id="name" name="name" class="form-control"
+        [(ngModel)]="defaultUserSettings.name" />
+    <div [hidden]="nameField.valid ||nameField.untouched" class="alert alert-danger">
+        Entrez votre nom
+    </div>
+</div>
+```
+
+*Attention le comportement peut varier suivant le navigateur*
+
+#### Envoi du formulaire
+
+1 . Retirer le ngNativeValidate permettant la validation native Html. En effet, nous preferons que la validation soit faite apres le click sur le bouton d'envoie. Et remplacer le par l'appel à la methode onSubmit:
+
+```html
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+```
+
+2 . Creation de la methode onSubmit dans le fichier user-settings-form.component.ts:
+
+
+```ts
+...
+import { NgForm } from '@angular/forms';
+...
+onSubmit(form : NgForm) {
+  console.log(' in submit : ', form.valid);
+}
+```
+
+3 . Tester dans votre navigateur l'envoi du formulaire en cliquant sur le bouton. Si le formaulaire est incomplet la console nous retourne le message in submit : false sinon true.
+
+4 . Retirer/commenter votre css et remplacer le par un selecteur de classe "classique":
+
+```css
+.field-error{
+    border: 1px solid red;
+}
+```
+
+5 . Dans le html, bind [class.field-error] sur l'input id="name" et l'activer si myForm.submitted && nameField.invalid return true.
+
+```html
+<input required #nameField="ngModel" id="name" name="name" class="form-control"
+                    [(ngModel)]="defaultUserSettings.name" 
+                    [class.field-error]="myForm.submitted && nameField.invalid"/>
+```
+
+6 . Sur la div de pop-up changer la condition d'affichage telquelle, cad, pop-up reste caché tant que l'on a pas clické sur le bouton ou que nameField soit valid:
+
+```html
+ <div [hidden]="!myForm.submitted || nameField.valid" class="alert alert-danger">
+```
+
+#### Gestion des événements de contrôle du formulaire
+
+1 . Exemple avec evenement onblur sur l'input id="name", l'evenement se produit lorsque l'utilisateur change de champs dans le formulaire (ici champs nom). Ajouter la methode ci-dessous a votre fichier html et coder la methode onBlur dans votre ts:
+
+```html
+<input required #nameField="ngModel" id="name" name="name" class="form-control"
+    [(ngModel)]="defaultUserSettings.name"
+    (blur)="onBlur(nameField)" 
+    [class.field-error]="myForm.submitted && nameField.invalid"/>
+```
+```ts
+  onBlur(field : NgModel) {
+    console.log(' in onBlur :', field.valid)
+  }
+```
+2 . Tester son effet dans votre navigateur, console ouverte.
+
+## HTTP Posting et acces aux datas
+
+#### Creation d'un service data a l'aide du CLI angular
+
+1 . Ouvrir un termine sur le path: src/app/data et taper la commande ci-dessous pour generer (g) un service (s) au nom de data.
+
+```cmd
+ng g s data
+```
+
+2 . Coder la methode du service qui sera appele lors de l'envoi du formulaire (postUserSettingsForm):
+
+```ts
+...
+import { DefaultUserSettings } from './default-user-settings';
+...
+export class DataService {
+  ...
+  postUserSettingsForm(userSettings: DefaultUserSettings) {
+  }
+}
+```
+
+#### Utilisation des observables pour post le formulaire
+
+Le traitement de l'envoi du formulaire par le server est asynchrone, et cela peut prendre un certain temps si nous avons un server ou connexion lente. Angular utilise des observables pour la programmation asynchrone.
+
+Le modèle d'observateur est un modèle de conception logicielle dans lequel un objet, appelé le **subject**, conserve une liste de ses dépendances, appeles **observers**, et les informe automatiquement des changements d'état. Ce modèle est similaire (mais pas identique) au modèle de conception de **publish** / **subscribe**.
+
+Les observables sont déclaratifs, c'est-à-dire que vous définissez une fonction pour publier des valeurs, mais elle n'est pas exécutée tant qu'un consommateur n'y a pas souscrit. Le consommateur abonné, reçoit ensuite des notifications jusqu'à la fin de la fonction ou jusqu'à ce qu'il se désabonne.
+
+Un observable peut fournir plusieurs valeurs de n'importe quel type: littéraux, messages ou événements, selon le contexte. L'API de réception des valeurs est la même, que les valeurs soient fournies de manière synchrone ou asynchrone. Parce que la logique de configuration et de démontage sont toutes deux gérées par l'observable, votre code d'application n'a qu'à se soucier de s'abonner pour consommer des valeurs et, une fois terminé, de se désinscrire. Que le flux soit composé de touches, d'une réponse HTTP ou d'un temporisateur d'intervalle, l'interface pour écouter les valeurs et arrêter l'écoute est la même.
+
+En raison de ces avantages, les observables sont largement utilisés dans Angular et sont également recommandés pour le développement d'applications.
+
+1 . Completer la methode postUserSettingsForm():
+
+```ts
+...
+import { Observable, of } from 'rxjs';
+...
+  postUserSettingsForm(userSettings: DefaultUserSettings) : Observable<DefaultUserSettings>{
+    return of(userSettings);
+  }
+```
+
+2 . Completer votre fichier user-settings-form.component.ts en passant en parametre du constructeur un attribut prive membre de la classe DataService:
+
+```ts
+...
+import { DataService } from '../data/data.service';
+...
+constructor(private dataService : DataService) {}
+```
+
+3 . Completer la methode onSubmit
+
+```ts
+...
+onSubmit(form : NgForm) {
+  console.log(' in submit : ', form.valid);
+  this.dataService.postUserSettingsForm(this.defaultUserSettings).subscribe(
+    result => console.log('sucess : ', result),
+    error => console.log ('error : ', error)
+  );
+}
+...
+```
+
+4 . Tester dans votre navigateur console ouverte que vont recuperiez bien les console log de l'observable.
+
+#### Utilisation HttpClient pour l'acces Http
+
+1 . Importer HttpClient dans le fichier app.module.ts
+
+```ts
+...
+import { HttpClientModule } from '@angular/common/http';
+...
+@NgModule({
+...
+  imports: [
+    ...
+    HttpClientModule
+  ],
+  ...
+})
+```
+
+2 . Completer votre fichier data.service.ts en passant en parametre du constructeur un attribut prive membre de la classe HttpClient:
+
+```ts
+...
+import { HttpClient } from '@angular/common/http';
+...
+export class DataService {
+  constructor(private http : HttpClient) { }
+  ...
+}
+```
+
+3 . Remplacer le 'fake' observables retourne par la methode postUserSettingsForm par:
+
+```ts
+...
+export class DataService {
+  constructor(private http : HttpClient) { }
+  postUserSettingsForm(userSettings: DefaultUserSettings) : Observable<any>{
+    return this.http.post('url', userSettings);
+    // return of(userSettings);
+  }
+}
+```
+
+#### Utilisation de HttpClient pour post le formulaire
+
+Postons notre formulaire sur un endpoint reel. Pour cela nous utiliserons l'outil PutsReq https://putsreq.com/?utm_source=recordnotfound.com.
+
+1 . Dans PutsReq, cliquer sur le bouton "create a PutsReq" et copier/ coller l'url apres 'name=Pablo' pour le coller sur le parametre url de la methode postUserSettingsForm.
+
+```ts
+  postUserSettingsForm(userSettings: DefaultUserSettings) : Observable<any>{
+    return this.http.post('https://putsreq.com/FnEgsJhPiCeGZGwSHOc7', userSettings);
+    // return of(userSettings);
+  }
+```
+
+2 . Renseigner dans PutsReq la reponse attendu en éditant la partie "Response Builder" et y indiquer:
+
+```ts
+var parsedBody = JSON.parse(request.body);
+response.body = parsedBody;
+```
+
+**Cliquer sur le bouton update poour la prise en compte de vos modification dans PutsReq**
+
+3 . Tester dans votre navigateur... Si une erreur du type CORS Error — and How the Access-Control-Allow-Origin Header Works apparait. Cliquer dans l'inspecteur de votre navigateur dans network puis editer et renvoyer la requete en specifiant dans le header access-control-allow-origin: *. Puis controler votre interface putsreq
+
+![interface putsreq](document/putsreq.png)
 
 
 
+#### Gestion des errors post
+
+#### Recuperer les datas pour un element selectionne
 
 
-
-## HTTP Posting
 
 ## Third-party Controls
 
+
 ## Bug-fix et Tips
+
 
 1 . tsconfig.json ==> file not found
 * Ajouter à votre fichier de config
