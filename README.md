@@ -1,5 +1,45 @@
 # Angular_Forms
 
+<!-- TOC -->
+
+- [Angular_Forms](#angular_forms)
+    - [Form basics](#form-basics)
+    - [Creation du projet](#creation-du-projet)
+    - [Basic Angular FormsModule](#basic-angular-formsmodule)
+        - [Creation d'un component Form (Formulaire)](#creation-dun-component-form-formulaire)
+        - [Utilisation de bootstrap pour le style](#utilisation-de-bootstrap-pour-le-style)
+        - [Utilisation de checkboxes et radios](#utilisation-de-checkboxes-et-radios)
+        - [Controle de la selection et des options](#controle-de-la-selection-et-des-options)
+        - [Autre controles du formulaire](#autre-controles-du-formulaire)
+    - [Data binding](#data-binding)
+        - [Utilisation de NgForm](#utilisation-de-ngform)
+        - [NgModel](#ngmodel)
+        - [Creation d'un model de data](#creation-dun-model-de-data)
+        - [Data binding bidirectionnel](#data-binding-bidirectionnel)
+        - [Copie des datas du formulaire](#copie-des-datas-du-formulaire)
+    - [Validation du formulaire](#validation-du-formulaire)
+        - [Validation de champs HTML](#validation-de-champs-html)
+        - [Validation des classes CSS](#validation-des-classes-css)
+        - [Validation des proprietes ngModel](#validation-des-proprietes-ngmodel)
+        - [Style du formulaire avec les erreurs de validation (toast, pop-up ...)](#style-du-formulaire-avec-les-erreurs-de-validation-toast-pop-up-)
+        - [Envoi du formulaire](#envoi-du-formulaire)
+        - [Gestion des événements de contrôle du formulaire](#gestion-des-événements-de-contrôle-du-formulaire)
+    - [HTTP Posting et acces aux datas](#http-posting-et-acces-aux-datas)
+        - [Creation d'un service data a l'aide du CLI angular](#creation-dun-service-data-a-laide-du-cli-angular)
+        - [Utilisation des observables pour post le formulaire](#utilisation-des-observables-pour-post-le-formulaire)
+        - [Utilisation HttpClient pour l'acces Http](#utilisation-httpclient-pour-lacces-http)
+        - [Utilisation de HttpClient pour post le formulaire](#utilisation-de-httpclient-pour-post-le-formulaire)
+        - [Gestion des errors post](#gestion-des-errors-post)
+        - [Recuperer les datas pour un element selectionne](#recuperer-les-datas-pour-un-element-selectionne)
+    - [Third-party Controls](#third-party-controls)
+        - [Ressources de formulaire sur angular.io](#ressources-de-formulaire-sur-angulario)
+        - [Installation et utilisation de ngx-bootstrap](#installation-et-utilisation-de-ngx-bootstrap)
+        - [Les boutons](#les-boutons)
+        - [Les dates et periodes](#les-dates-et-periodes)
+    - [Bug-fix et Tips](#bug-fix-et-tips)
+
+<!-- /TOC -->
+
 ## Form basics
 
 Il existe deux type de formulaire Angulaire:
@@ -72,7 +112,7 @@ import { FormsModule } from '@angular/forms';
  ...
 ```
 
-#### Creation d'un component Form (Formulaire)
+### Creation d'un component Form (Formulaire)
 
 Executer la commande suivante pour creer le component user-settings-form 
 
@@ -105,7 +145,7 @@ ng g c user-settings-form
 *Rappel* il est necessaire de rebuild lors de l'ajout de modules.
 
 
-#### Utilisation de bootstrap pour le style
+### Utilisation de bootstrap pour le style
 
 Nous utiliserons https://getbootstrap.com/docs/4.5/components/forms/  pour s'inspirer du templet html de notre formulaire.
 
@@ -144,7 +184,7 @@ npm install --save bootstrap
 </form>
 ```
 
-#### Utilisation de checkboxes et radios
+### Utilisation de checkboxes et radios
 
 1 . Completer votre fichier user-settings-form.html par un groupe de bouton radio tapper:
 
@@ -172,7 +212,7 @@ npm install --save bootstrap
 </div>
 ```
 
-#### Controle de la selection et des options
+### Controle de la selection et des options
 
 1 . Completer votre fichier user-settings-form.html par une liste de choix tapper:
 
@@ -188,7 +228,7 @@ npm install --save bootstrap
 </div>
 ```
 
-#### Autre controles du formulaire
+### Autre controles du formulaire
 
 1 . Completer votre fichier user-settings-form.html par une zone de saisi libre, une zone de saisi password et une saisi de date:
 
@@ -212,7 +252,7 @@ npm install --save bootstrap
 
 ##  Data binding
 
-#### Utilisation de NgForm
+### Utilisation de NgForm
 
 1 . Utiliser une variable de reference sur la directive ngForm
 
@@ -234,7 +274,7 @@ Nous pouvons constater que la variable referent ngForm est de type Object.
 {{ myForm.form | json }
 ```
 
-#### NgModel
+### NgModel
 
 1 . Ajouter ngModel à notre balise input et controler de contenu de la propriete value de notre reference myForm.
 
@@ -249,7 +289,7 @@ Nous pouvons constater que la variable referent ngForm est de type Object.
 **Lors de la saisi d'un nom vous pouvez constater que la valeur name change instantanement**
 
 
-#### Creation d'un model de data
+### Creation d'un model de data
 
 1 . Creer un dossier src/app/data
 2 . Creer un fichier user-settings.ts
@@ -283,7 +323,7 @@ export class defaultUseSettingsFormComponent implements OnInit {
 }
 ```
 
-#### Data binding bidirectionnel
+### Data binding bidirectionnel
 
 1 . Nous allons maintenant brancher notre model a notre formulaire. Pour cela nous ajoutons à notre templet html des banana bracket ( [()] ) autour de [(ngModel)]="defaultUseSettings.[propriete]" et ajouter un controle à la fin.
 
@@ -307,7 +347,7 @@ export class defaultUseSettingsFormComponent implements OnInit {
 <h3>{{ defaultUseSettings | json }}</h3>
 ```
 
-#### Copie des datas du formulaire
+### Copie des datas du formulaire
 
 Exemple dans le cas d'une deconnexion utilisateur ou un retour arriere de navigation, les données du formulaire initiales ne doivent pas etre corrompu.
 
@@ -326,7 +366,7 @@ userSettings : DefaultUserSettings = { ...this.defaultUserSettings}
 
 ## Validation du formulaire
 
-#### Validation de champs HTML
+### Validation de champs HTML
 
 Les attributs de validation HTML5 sont:
 * required
@@ -370,7 +410,7 @@ Les attributs de validation HTML5 sont:
 ```html
 <input  type="number" min="3" max="300" id="name" name="name" class="form-control" [(ngModel)]="defaultUserSettings.name"/>
 ```    
-#### Validation des classes CSS
+### Validation des classes CSS
 
 1 . Remplacer type="number" min="3" max="300" par required.
 2 . Ajouter une variable de reference #classTest.
@@ -386,7 +426,7 @@ Les attributs de validation HTML5 sont:
 
 4 . Nous pouvons constater le changement de proprietes lors de la manipulation du champs.
 
-#### Validation des proprietes ngModel
+### Validation des proprietes ngModel
 
 1 . Reprenons l'input suivant et ajoutons ngModel comme valeur de notre reference maintenant appelé #propertyTest:
 
@@ -404,7 +444,7 @@ Les attributs de validation HTML5 sont:
 <h3>invalid : {{ propertyTest.invalid }}</h3>
 ```
 
-#### Style du formulaire avec les erreurs de validation (toast, pop-up ...)
+### Style du formulaire avec les erreurs de validation (toast, pop-up ...)
 
 1 . Effacez/ commentez les lignes precedentes utilise pour le debug et modifier votre templet html afin que:
 
@@ -442,7 +482,7 @@ Les attributs de validation HTML5 sont:
 
 *Attention le comportement peut varier suivant le navigateur*
 
-#### Envoi du formulaire
+### Envoi du formulaire
 
 1 . Retirer le ngNativeValidate permettant la validation native Html. En effet, nous preferons que la validation soit faite apres le click sur le bouton d'envoie. Et remplacer le par l'appel à la methode onSubmit:
 
@@ -486,7 +526,7 @@ onSubmit(form : NgForm) {
  <div [hidden]="!myForm.submitted || nameField.valid" class="alert alert-danger">
 ```
 
-#### Gestion des événements de contrôle du formulaire
+### Gestion des événements de contrôle du formulaire
 
 1 . Exemple avec evenement onblur sur l'input id="name", l'evenement se produit lorsque l'utilisateur change de champs dans le formulaire (ici champs nom). Ajouter la methode ci-dessous a votre fichier html et coder la methode onBlur dans votre ts:
 
@@ -505,7 +545,7 @@ onSubmit(form : NgForm) {
 
 ## HTTP Posting et acces aux datas
 
-#### Creation d'un service data a l'aide du CLI angular
+### Creation d'un service data a l'aide du CLI angular
 
 1 . Ouvrir un termine sur le path: src/app/data et taper la commande ci-dessous pour generer (g) un service (s) au nom de data.
 
@@ -526,7 +566,7 @@ export class DataService {
 }
 ```
 
-#### Utilisation des observables pour post le formulaire
+### Utilisation des observables pour post le formulaire
 
 Le traitement de l'envoi du formulaire par le server est asynchrone, et cela peut prendre un certain temps si nous avons un server ou connexion lente. Angular utilise des observables pour la programmation asynchrone.
 
@@ -574,7 +614,7 @@ onSubmit(form : NgForm) {
 
 4 . Tester dans votre navigateur console ouverte que vont recuperiez bien les console log de l'observable.
 
-#### Utilisation HttpClient pour l'acces Http
+### Utilisation HttpClient pour l'acces Http
 
 1 . Importer HttpClient dans le fichier app.module.ts
 
@@ -617,7 +657,7 @@ export class DataService {
 }
 ```
 
-#### Utilisation de HttpClient pour post le formulaire
+### Utilisation de HttpClient pour post le formulaire
 
 Postons notre formulaire sur un endpoint reel. Pour cela nous utiliserons l'outil PutsReq https://putsreq.com/?utm_source=recordnotfound.com.
 
@@ -651,7 +691,7 @@ parsedBody.id='5124'
 response.body = parsedBody;
 ```
 
-#### Gestion des errors post
+### Gestion des errors post
 
 1 . Commentez/ Supprimez la reponse builder de putsreq pour y indiquer desormais une reponse nous retournant une erreur type 400:
 
@@ -723,7 +763,7 @@ onSubmit(form : NgForm) {
 }
 ```
 
-#### Recuperer les datas pour un element selectionne
+### Recuperer les datas pour un element selectionne
 
 1 . A l'aide de la directive *ngFor creer une liste en lieu et place de la selection du type de souscription 'Annuelle'...
 
@@ -783,13 +823,13 @@ getSubscriptiontypes(): Observable<string[]> {
 
 Le probleme a resoudre et le cross-platform. Chaque navigateur reagissent differemment. Pour resoudre le proble nous etidirons les ressources angular.io et ngx-bootstrap
 
-#### Ressources de formulaire sur angular.io
+### Ressources de formulaire sur angular.io
 
 * https://angular.io/resources?category=development
 * https://material.angular.io/ ( component>form control )
 * https://www.primefaces.org/primeng/
 
-#### Installation et utilisation de ngx-bootstrap
+### Installation et utilisation de ngx-bootstrap
 
 1 . Ajouter le component buttons de la librairy ngx-bootstrap
 
@@ -823,7 +863,7 @@ Component
   singleModel = "On";
 ```
 
-#### Les boutons
+### Les boutons
 
 1 . Recuperer les boutons radio de la doc ngx  et les remplacer en lieu et place de notre choix d'interface:
 
@@ -843,7 +883,7 @@ Component
 
 2 . Controler l'etat des boutons, commenter le contenu de la methode onSubmit et un indiquer un console.log(' in submit : ', form.value);
 
-#### Les dates et periodes
+### Les dates et periodes
 
 1 . installer et ajouter le component datapicker à votre projet et module
 
